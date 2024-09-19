@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test';
+import { Contact } from '../pages/contact';
 import { Home } from '../pages/home';
 import { Login } from '../pages/login';
 import { SignUp } from '../pages/signup';
@@ -16,7 +17,7 @@ test.describe('Automation Exercise', () => {
     });
     await test.step('SignUp Credentials', async () => {
       const login = new Login(page);
-      await login.signUp('Hackpro Team', 'hackpro3@yopmail.com');
+      await login.signUp('Hackpro Team', 'hackpro4@yopmail.com');
     });
     await test.step('Create Account', async () => {
       const signUp = new SignUp(page);
@@ -65,5 +66,33 @@ test.describe('Automation Exercise', () => {
           await login.login(process.env.USER_TEST, process.env.PASSWORD_TEST + '123');
           expect(await login.labelWrongUserOrPasswordIsVisible()).toBeTruthy();
       });
+  });
+
+  test('Send email for contact', async({ page }) => {
+    const home = new Home(page);
+    const contact = new Contact(page);
+
+    await test.step('Navigate To Contact Page', async() => {
+        await home.navigateToContactUs();
+    });
+
+    await test.step('Fill Contact Form', async() => {
+        await contact.fillName('Edwin Mantilla');
+        await contact.fillEmail('hackpro3@yopmail.com');
+        await contact.fillSubject('Example Test');
+        await contact.fillMessage('Example Text Test');
+    });
+
+    await test.step('Upload File', async() => {
+      await contact.uploadFile('helpers/ExampleTest.txt');
+    });
+
+    await test.step('Submit Form', async() => {
+      await contact.submit();
+      page.once('dialog', (dialog) => {
+        console.log(dialog.message());
+        dialog.accept();
+      });
+    });
   });
 });
