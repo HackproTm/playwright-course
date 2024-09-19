@@ -11,7 +11,7 @@ export class Login {
   readonly btnLogin: Locator;
   readonly lblIncorrectCredentials: Locator;
 
-  constructor(page: Page){
+  constructor(page: Page) {
     this.page = page;
     this.lblNewUser = page.getByText('New User Signup!');
     this.txtName = page.getByPlaceholder('Name');
