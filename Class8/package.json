@@ -1,0 +1,16 @@
+{
+  "name": "class8",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@playwright/test": "^1.46.1",
+    "@types/node": "^22.5.3"
+  },
+  "scripts": {},
+  "dependencies": {
+    "@faker-js/faker": "^9.0.1",
+    "ajv": "^8.17.1",
+    "dotenv": "^16.4.5"
+  }
+}
